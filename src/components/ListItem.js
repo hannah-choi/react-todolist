@@ -2,11 +2,23 @@ import React, { useState } from "react";
 
 function ListItem({ value, deleteTodo, updateTodo, index }) {
     const [isEditing, setEditingMode] = useState(false);
+    const [complete, setComplete] = useState(false);
     const [task, setNewTask] = useState(value);
+
+    const toggleComplete = () => {
+        setComplete(!complete);
+    };
 
     const viewMode = (
         <div>
-            {value}{" "}
+            <p
+                className={complete ? "completed" : ""}
+                onClick={() => {
+                    toggleComplete();
+                }}
+            >
+                {value}
+            </p>{" "}
             <input
                 type="button"
                 value="Update"
