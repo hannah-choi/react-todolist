@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 
-function ListItem({ value, deleteTodo, index }) {
+function ListItem({ value, deleteTodo, updateTodo, index }) {
     const [isEditing, setEditingMode] = useState(false);
+    const [task, setNewTask] = useState(value);
 
     const viewMode = (
-        <form>
-            {value} <input type="button" value="Update" />{" "}
+        <div>
+            {value}{" "}
+            <input
+                type="button"
+                value="Update"
+                onClick={() => {
+                    setEditingMode(true);
+                }}
+            />{" "}
             <input
                 type="button"
                 value="Delete"
@@ -13,13 +21,31 @@ function ListItem({ value, deleteTodo, index }) {
                     deleteTodo(index);
                 }}
             />
-        </form>
+        </div>
     );
 
     const editMode = (
-        <form>
-            <input type="button" value="Submit" />{" "}
-            <input type="button" value="Cancel" />
+        <form
+            onSubmit={function (e) {
+                e.preventDefault();
+                updateTodo(index, task);
+                setEditingMode(false);
+            }}
+        >
+            <input
+                type="text"
+                value={task}
+                name="editedTodo"
+                onChange={e => setNewTask(e.target.value)}
+            />
+            <input type="submit" value="submit" />{" "}
+            <input
+                type="button"
+                value="Cancel"
+                onClick={() => {
+                    setEditingMode(false);
+                }}
+            />
         </form>
     );
 

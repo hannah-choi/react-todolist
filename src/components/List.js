@@ -1,7 +1,7 @@
 import React from "react";
 import ListItem from "./ListItem";
 
-function List({ data, deleteTodo }) {
+function List({ data, deleteTodo, updateTodo }) {
     return (
         <ul>
             {data.map((item, i) => (
@@ -10,6 +10,7 @@ function List({ data, deleteTodo }) {
                     key={i}
                     index={i}
                     deleteTodo={deleteTodo}
+                    updateTodo={updateTodo}
                 />
             ))}
         </ul>

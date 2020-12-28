@@ -14,16 +14,26 @@ function App() {
         setTodos([...todos, { task: e.target.addTodoInput.value }]);
     };
 
-    const deleteTodo = function (index) {
+    const deleteTodo = index => {
         let newArray = Array.from(todos);
         newArray.splice(index, 1);
+        setTodos(newArray);
+    };
+
+    const updateTodo = (index, newValue) => {
+        let newArray = Array.from(todos);
+        newArray[index].task = newValue;
         setTodos(newArray);
     };
 
     return (
         <div className="App">
             <Input addTodo={addTodo} />
-            <List data={todos} deleteTodo={deleteTodo} />
+            <List
+                data={todos}
+                deleteTodo={deleteTodo}
+                updateTodo={updateTodo}
+            />
         </div>
     );
 }
