@@ -7,7 +7,7 @@ function App() {
     const [todos, setTodos] = useState([
         { task: "Do the Laundry" },
         { task: "Go Grocery Shopping" },
-        { task: "Finish reading 'Practical Programmer'" },
+        { task: "Finish reading 'The Progmatic Programmer'" },
     ]);
 
     const addTodo = function (e) {
