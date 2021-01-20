@@ -1,43 +1,43 @@
 import React, { createContext, useContext, useState } from "react";
-import { v4 } from "uuid";
 
 const TodoContext = createContext();
 export const useTodo = () => useContext(TodoContext);
 
 function TodoProvider({ children }) {
     const [todos, setTodos] = useState([
-        { id: v4(), complete: false, task: "Do the Laundry" },
-        { id: v4(), complete: false, task: "Go Grocery Shopping" },
+        { complete: false, task: "Do the Laundry" },
+        { complete: false, task: "Go Grocery Shopping" },
         {
-            id: v4(),
             complete: false,
             task: "Finish reading 'The Progmatic Programmer'",
         },
     ]);
 
     const addTodo = newText => {
-        setTodos([...todos, { id: v4(), task: newText, complete: false }]);
+        setTodos([...todos, { task: newText, complete: false }]);
     };
 
     const completeTodo = (id, status) => {
-        setTodos(
-            todos.map(item =>
-                item.id === id ? { ...item, complete: status } : item
-            )
-        );
+        let newArray = Array.from(todos);
+        newArray[id].complete = status;
+        setTodos(newArray);
+        // setTodos(
+        //     todos.map(item =>
+        //         item.id === id ? { ...item, complete: status } : item
+        //     )
+        // );
     };
 
     const deleteTodo = id => {
         let newArray = Array.from(todos);
-        setTodos(newArray.filter(item => item.id !== id));
+        newArray.splice(id, 1);
+        setTodos(newArray);
     };
 
     const updateTodo = (id, newValue) => {
-        setTodos(
-            todos.map(item =>
-                item.id === id ? { ...item, task: newValue } : item
-            )
-        );
+        let newArray = Array.from(todos);
+        newArray[id].task = newValue;
+        setTodos(newArray);
     };
 
     return (
