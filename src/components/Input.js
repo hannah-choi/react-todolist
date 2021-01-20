@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useTodo from "../TodoProvider";
+import { useTodo } from "../TodoProvider";
 
 function Input() {
     const [newText, setNewText] = useState("");

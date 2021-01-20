@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import useTodo from "../TodoProvider";
+import React, { useState, useEffect } from "react";
+import { useTodo } from "../TodoProvider";
 
 function ListItem({ task, id }) {
     const [isEditing, setEditingMode] = useState(false);
@@ -50,7 +50,7 @@ function ListItem({ task, id }) {
         >
             <input
                 type="text"
-                value={task}
+                value={newValue}
                 name="editedTodo"
                 onChange={e => setNewValue(e.target.value)}
             />

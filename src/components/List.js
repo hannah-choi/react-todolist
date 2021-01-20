@@ -1,6 +1,6 @@
 import React from "react";
 import ListItem from "./ListItem";
-import useTodo from "../TodoProvider";
+import { useTodo } from "../TodoProvider";
 
 function List() {
     const { todos } = useTodo();

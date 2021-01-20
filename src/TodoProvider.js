@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
 import { v4 } from "uuid";
 
-const todoContext = createContext();
-export const useTodo = () => useContext(todoContext);
+const TodoContext = createContext();
+export const useTodo = () => useContext(TodoContext);
 
-export default function TodoProvider({ children }) {
+function TodoProvider({ children }) {
     const [todos, setTodos] = useState([
         { id: v4(), complete: false, task: "Do the Laundry" },
         { id: v4(), complete: false, task: "Go Grocery Shopping" },
@@ -29,8 +29,7 @@ export default function TodoProvider({ children }) {
 
     const deleteTodo = id => {
         let newArray = Array.from(todos);
-        newArray = newArray.filter(item => (item.id = !id));
-        setTodos(newArray);
+        setTodos(newArray.filter(item => item.id !== id));
     };
 
     const updateTodo = (id, newValue) => {
@@ -42,10 +41,12 @@ export default function TodoProvider({ children }) {
     };
 
     return (
-        <TodoProvider
+        <TodoContext.Provider
             value={{ addTodo, deleteTodo, updateTodo, completeTodo, todos }}
         >
             {children}
-        </TodoProvider>
+        </TodoContext.Provider>
     );
 }
+
+export default TodoProvider;
