@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+import useTodo from "../TodoProvider";
 
-function ListItem({ value, deleteTodo, updateTodo, index }) {
+function ListItem({ task, id }) {
     const [isEditing, setEditingMode] = useState(false);
     const [complete, setComplete] = useState(false);
-    const [task, setNewTask] = useState(value);
+    const [newValue, setNewValue] = useState(task);
+
+    const { completeTodo, deleteTodo, updateTodo } = useTodo();
 
     const toggleComplete = () => {
         setComplete(!complete);
+        completeTodo(id, complete);
     };
 
     const viewMode = (
@@ -17,7 +21,7 @@ function ListItem({ value, deleteTodo, updateTodo, index }) {
                     toggleComplete();
                 }}
             >
-                {value}
+                {task}
             </p>{" "}
             <input
                 type="button"
@@ -30,7 +34,7 @@ function ListItem({ value, deleteTodo, updateTodo, index }) {
                 type="button"
                 value="Delete"
                 onClick={() => {
-                    deleteTodo(index);
+                    deleteTodo(id);
                 }}
             />
         </div>
@@ -40,7 +44,7 @@ function ListItem({ value, deleteTodo, updateTodo, index }) {
         <form
             onSubmit={function (e) {
                 e.preventDefault();
-                updateTodo(index, task);
+                updateTodo(id, newValue);
                 setEditingMode(false);
             }}
         >
@@ -48,7 +52,7 @@ function ListItem({ value, deleteTodo, updateTodo, index }) {
                 type="text"
                 value={task}
                 name="editedTodo"
-                onChange={e => setNewTask(e.target.value)}
+                onChange={e => setNewValue(e.target.value)}
             />
             <input type="submit" value="submit" />{" "}
             <input

@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 const todoContext = createContext();
 export const useTodo = () => useContext(todoContext);
 
-export default function TodoProvider() {
+export default function TodoProvider({ children }) {
     const [todos, setTodos] = useState([
         { id: v4(), complete: false, task: "Do the Laundry" },
         { id: v4(), complete: false, task: "Go Grocery Shopping" },
@@ -15,16 +15,14 @@ export default function TodoProvider() {
         },
     ]);
 
-    const addTodo = text => {
-        setTodos([...todos, { id: v4(), task: text, complete: false }]);
+    const addTodo = newText => {
+        setTodos([...todos, { id: v4(), task: newText, complete: false }]);
     };
 
     const completeTodo = (id, status) => {
         setTodos(
             todos.map(item =>
-                item.id === id
-                    ? { id: item.id, task: item.task, complete: status }
-                    : item
+                item.id === id ? { ...item, complete: status } : item
             )
         );
     };
@@ -35,12 +33,10 @@ export default function TodoProvider() {
         setTodos(newArray);
     };
 
-    const updateTodo = (id, newValue, status) => {
+    const updateTodo = (id, newValue) => {
         setTodos(
             todos.map(item =>
-                item.id === id
-                    ? { id: item.id, task: newValue, complete: status }
-                    : item
+                item.id === id ? { ...item, task: newValue } : item
             )
         );
     };
@@ -48,6 +44,8 @@ export default function TodoProvider() {
     return (
         <TodoProvider
             value={{ addTodo, deleteTodo, updateTodo, completeTodo, todos }}
-        ></TodoProvider>
+        >
+            {children}
+        </TodoProvider>
     );
 }

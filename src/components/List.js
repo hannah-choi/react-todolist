@@ -1,17 +1,14 @@
 import React from "react";
 import ListItem from "./ListItem";
+import useTodo from "../TodoProvider";
 
-function List({ data, deleteTodo, updateTodo }) {
+function List() {
+    const { todos } = useTodo();
+
     return (
         <ul>
-            {data.map((item, i) => (
-                <ListItem
-                    value={item.task}
-                    key={i}
-                    index={i}
-                    deleteTodo={deleteTodo}
-                    updateTodo={updateTodo}
-                />
+            {todos.map((item, i) => (
+                <ListItem key={i} {...item} />
             ))}
         </ul>
     );
