@@ -1,15 +1,17 @@
 import React, { createContext, useContext, useState } from "react";
+import { v4 } from "uuid";
 
 const TodoContext = createContext();
 export const useTodo = () => useContext(TodoContext);
 
 function TodoProvider({ children }) {
     const [todos, setTodos] = useState([
-        { complete: false, task: "Do the Laundry" },
-        { complete: false, task: "Go Grocery Shopping" },
+        { complete: false, task: "Todo1", id: v4() },
+        { complete: false, task: "Todo2", id: v4() },
         {
             complete: false,
-            task: "Finish reading 'The Progmatic Programmer'",
+            task: "Todo3",
+            id: v4(),
         },
     ]);
 
@@ -29,9 +31,7 @@ function TodoProvider({ children }) {
     };
 
     const deleteTodo = id => {
-        let newArray = Array.from(todos);
-        newArray.splice(id, 1);
-        setTodos(newArray);
+        setTodos(todos.filter(item => item.id !== id));
     };
 
     const updateTodo = (id, newValue) => {

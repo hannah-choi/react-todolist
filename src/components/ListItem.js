@@ -28,6 +28,7 @@ function ListItem({ task, id }) {
                 value="Update"
                 onClick={() => {
                     setEditingMode(true);
+                    setNewValue(task);
                 }}
             />{" "}
             <input
@@ -35,7 +36,6 @@ function ListItem({ task, id }) {
                 value="Delete"
                 onClick={() => {
                     deleteTodo(id);
-                    setNewValue(task);
                 }}
             />
         </div>
@@ -55,7 +55,6 @@ function ListItem({ task, id }) {
                 name="editedTodo"
                 onChange={e => {
                     setNewValue(e.target.value);
-                    console.log(newValue);
                 }}
             />
             <input type="submit" value="submit" />{" "}
