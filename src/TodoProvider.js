@@ -20,24 +20,23 @@ function TodoProvider({ children }) {
     };
 
     const completeTodo = (id, status) => {
-        let newArray = Array.from(todos);
-        newArray[id].complete = status;
-        setTodos(newArray);
-        // setTodos(
-        //     todos.map(item =>
-        //         item.id === id ? { ...item, complete: status } : item
-        //     )
-        // );
+        setTodos(
+            todos.map(todo =>
+                todo.id === id ? { ...todo, complete: status } : todo
+            )
+        );
     };
 
     const deleteTodo = id => {
-        setTodos(todos.filter(item => item.id !== id));
+        setTodos(todos.filter(todo => todo.id !== id));
     };
 
     const updateTodo = (id, newValue) => {
-        let newArray = Array.from(todos);
-        newArray[id].task = newValue;
-        setTodos(newArray);
+        setTodos(
+            todos.map(todo =>
+                todo.id === id ? { ...todo, task: newValue } : todo
+            )
+        );
     };
 
     return (

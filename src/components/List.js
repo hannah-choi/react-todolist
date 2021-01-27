@@ -7,8 +7,8 @@ function List() {
 
     return (
         <ul>
-            {todos.map((item, i) => (
-                <ListItem key={i} {...item} />
+            {todos.map(item => (
+                <ListItem key={item.id} {...item} />
             ))}
         </ul>
     );
