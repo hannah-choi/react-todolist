@@ -1,7 +1,24 @@
 import React from "react";
+import { useTodo } from "../TodoProvider";
 
 function Input() {
-    return <form></form>;
+    const { addTodo } = useTodo();
+
+    const handleSubmit = e => {
+        let newTodo = e.target.newTodo;
+        e.preventDefault();
+        if (newTodo.value) {
+            addTodo(newTodo.value);
+            newTodo.value = "";
+        }
+    };
+
+    return (
+        <form onSubmit={e => handleSubmit(e)}>
+            <input type="text" name="newTodo" />
+            <input type="submit" />
+        </form>
+    );
 }
 
 export default Input;
