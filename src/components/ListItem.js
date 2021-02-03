@@ -15,7 +15,7 @@ function ListItem({ id, task, completed }) {
 
     const view = (
         <div style={{ textDecoration: completed ? "line-through" : "" }}>
-            <input type="checkbox" checked={completed ? true : false} />
+            <input type="checkbox" defaultChecked={completed ? true : false} />
             {task} <button onClick={() => setEditing(true)}>Edit</button>
             <button onClick={() => deleteTodo(id)}>Delete</button>
         </div>

@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Jost&display=swap");
 
+:root {
+    --almostWhite: #fafafa;
+    --lightGray: #ccc;
+    --darkGray: #363537;
+    --almostBlack: #181818;
+}
+
 body {
     font-family: "Jost", sans-serif;
     position: relative;
@@ -7,10 +14,11 @@ body {
     height: 100vh;
 }
 
-#root {
+.App {
     width: 600px;
     height: 400px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -42,7 +50,7 @@ input[type="text"] {
     border-radius: 0;
     outline: none;
     border: 1px solid #222222;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 input[type="checkbox"] {
@@ -58,4 +66,96 @@ li,
 ul {
     margin: 0;
     padding-left: 0;
+}
+
+.light-mode {
+    background-color: #f0f0f0;
+    color: #363537;
+
+    button,
+    input:not([type="text"], [type="checkbox"]) {
+        padding: 2px 5px;
+        border: 1px solid black;
+        background-color: white;
+        color: black;
+        font-family: inherit;
+        margin: 2px;
+    }
+}
+
+.dark-mode {
+    background-color: #181818;
+    color: #fafafa;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: #2196f3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(34px);
+    -ms-transform: translateX(34px);
+    transform: translateX(34px);
+}
+
+.slider.round {
+    border-radius: 35px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }

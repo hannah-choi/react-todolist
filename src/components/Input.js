@@ -14,7 +14,7 @@ function Input() {
     };
 
     return (
-        <form onSubmit={e => handleSubmit(e)}>
+        <form className="todoForm" onSubmit={e => handleSubmit(e)}>
             <input type="text" name="newTodo" />
             <input type="submit" />
         </form>
