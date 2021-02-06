@@ -1,74 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTodo } from "../TodoProvider";
 
-function ListItem({ task, id }) {
-    const [isEditing, setEditingMode] = useState(false);
-    const [complete, setComplete] = useState(false);
-    const [newValue, setNewValue] = useState(task);
+function ListItem({ id, task, completed }) {
+    const { deleteTodo, updateTodo } = useTodo();
 
-    const { completeTodo, deleteTodo, updateTodo } = useTodo();
+    const [editing, setEditing] = useState(false);
+    const [text, setText] = useState(task);
 
-    const toggleComplete = () => {
-        setComplete(!complete);
-        completeTodo(id, complete);
+    const handleUpdate = e => {
+        e.preventDefault();
+        updateTodo(id, text);
+        setEditing(false);
     };
 
-    const viewMode = (
-        <div>
-            <p
-                className={complete ? "completed" : ""}
-                onClick={() => {
-                    toggleComplete();
-                }}
-            >
-                {task}
-            </p>{" "}
-            <input
-                type="button"
-                value="Update"
-                onClick={() => {
-                    setEditingMode(true);
-                    setNewValue(task);
-                }}
-            />{" "}
-            <input
-                type="button"
-                value="Delete"
-                onClick={() => {
-                    deleteTodo(id);
-                }}
-            />
+    const view = (
+        <div style={{ textDecoration: completed ? "line-through" : "" }}>
+            <input type="checkbox" defaultChecked={completed ? true : false} />
+            {task} <button onClick={() => setEditing(true)}>Edit</button>
+            <button onClick={() => deleteTodo(id)}>Delete</button>
         </div>
     );
 
-    const editMode = (
-        <form
-            onSubmit={function (e) {
-                e.preventDefault();
-                updateTodo(id, newValue);
-                setEditingMode(false);
-            }}
-        >
+    const edit = (
+        <form onSubmit={e => handleUpdate(e)}>
             <input
                 type="text"
-                value={newValue}
-                name="editedTodo"
-                onChange={e => {
-                    setNewValue(e.target.value);
-                }}
+                value={text}
+                onChange={({ target }) => setText(target.value)}
             />
-            <input type="submit" value="submit" />{" "}
+            <input type="submit" value="update" />
             <input
                 type="button"
-                value="Cancel"
-                onClick={() => {
-                    setEditingMode(false);
-                }}
+                value="cancel"
+                onClick={() => setEditing(false)}
             />
         </form>
     );
 
-    return <li>{isEditing ? editMode : viewMode}</li>;
+    return <li>{editing ? edit : view}</li>;
 }
 
 export default ListItem;

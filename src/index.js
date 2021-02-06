@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import TodoProvider from "./TodoProvider";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import TodoProvider from "./TodoProvider";
 
 ReactDOM.render(
     <TodoProvider>
-        <App />
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
     </TodoProvider>,
     document.getElementById("root")
 );

@@ -1,43 +1,125 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost&display=swap");
 
 body {
-    margin: 4rem;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Jost", sans-serif;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
 }
 
-li {
-    padding: 10px;
+.App {
+    width: 600px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+button,
+input:not([type="text"], [type="checkbox"]) {
+    padding: 2px 5px;
+    font-family: inherit;
+    margin: 2px;
+    transition: 0.4s;
 }
 
 input[type="text"] {
-    padding: 4px;
-    margin-right: 5px;
+    width: 200px;
+    padding: 2px;
     font-family: inherit;
     border-radius: 0;
-    border: 1px solid black;
+    outline: none;
+    border: 1px solid #222222;
+    margin-bottom: 20px;
 }
 
-p {
-    padding: 0;
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+li {
+    padding: 5px;
+    list-style-type: none;
+}
+
+li,
+ul {
     margin: 0;
+    padding-left: 0;
+}
+
+.switch {
+    position: relative;
     display: inline-block;
+    width: 60px;
+    height: 34px;
 }
 
-input[type="button"],
-input[type="submit"] {
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
     background-color: white;
-    border: 1px solid black;
-    padding: 5px 10px;
-    font-family: inherit;
-    font-size: 0.8rem;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
 }
 
-input[type="button"]:hover,
-input[type="submit"]:hover {
-    background-color: black;
-    color: white;
+input:checked + .slider {
+    background-color: #2196f3;
 }
 
-.completed {
-    text-decoration: line-through;
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(22px);
+    -ms-transform: translateX(22px);
+    transform: translateX(22px);
+}
+
+.slider.round {
+    border-radius: 35px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }

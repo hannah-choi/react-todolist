@@ -1,30 +1,19 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { useState, useContext, createContext } from "react";
 import { v4 } from "uuid";
 
-const TodoContext = createContext();
+export const TodoContext = createContext(TodoProvider);
 export const useTodo = () => useContext(TodoContext);
 
-function TodoProvider({ children }) {
+export default function TodoProvider({ children }) {
     const [todos, setTodos] = useState([
-        { complete: false, task: "Todo1", id: v4() },
-        { complete: false, task: "Todo2", id: v4() },
-        {
-            complete: false,
-            task: "Todo3",
-            id: v4(),
-        },
+        { id: v4(), task: "Todo1", completed: false },
+        { id: v4(), task: "Todo2", completed: true },
+        { id: v4(), task: "Todo3", completed: true },
+        { id: v4(), task: "Todo4", completed: false },
     ]);
 
-    const addTodo = newText => {
-        setTodos([...todos, { task: newText, complete: false }]);
-    };
-
-    const completeTodo = (id, status) => {
-        setTodos(
-            todos.map(todo =>
-                todo.id === id ? { ...todo, complete: status } : todo
-            )
-        );
+    const addTodo = newTodo => {
+        setTodos([...todos, { id: v4(), task: newTodo, completed: false }]);
     };
 
     const deleteTodo = id => {
@@ -41,11 +30,9 @@ function TodoProvider({ children }) {
 
     return (
         <TodoContext.Provider
-            value={{ addTodo, deleteTodo, updateTodo, completeTodo, todos }}
+            value={{ todos, addTodo, deleteTodo, updateTodo }}
         >
             {children}
         </TodoContext.Provider>
     );
 }
-
-export default TodoProvider;
