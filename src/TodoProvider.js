@@ -12,6 +12,21 @@ export default function TodoProvider({ children }) {
         { id: v4(), task: "Todo4", completed: false },
     ]);
 
+    // useEffect(
+    //     () =>
+    //         fetch("todos.json")
+    //             .then(res => res.json())
+    //             .then(data => {
+    //                 setTodos(
+    //                     complete === false
+    //                         ? data.filter(item => item.completed === false)
+    //                         : data.filter(item => item.completed === true)
+    //                 );
+    //                 console.log("rendered");
+    //             }),
+    //     []
+    // );
+
     const addTodo = newTodo => {
         setTodos([...todos, { id: v4(), task: newTodo, completed: false }]);
     };
@@ -30,7 +45,12 @@ export default function TodoProvider({ children }) {
 
     return (
         <TodoContext.Provider
-            value={{ todos, addTodo, deleteTodo, updateTodo }}
+            value={{
+                todos,
+                addTodo,
+                deleteTodo,
+                updateTodo,
+            }}
         >
             {children}
         </TodoContext.Provider>

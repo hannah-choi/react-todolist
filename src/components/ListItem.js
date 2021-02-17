@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import Progress from "./Progress";
 import { useTodo } from "../TodoProvider";
 
 function ListItem({ id, task, completed }) {
     const { deleteTodo, updateTodo } = useTodo();
 
     const [editing, setEditing] = useState(false);
+    const [progress, setProgress] = useState(true);
     const [text, setText] = useState(task);
+
+    const handleToggle = () => setProgress(!progress);
 
     const handleUpdate = e => {
         e.preventDefault();
@@ -18,6 +22,12 @@ function ListItem({ id, task, completed }) {
             <input type="checkbox" defaultChecked={completed ? true : false} />
             {task} <button onClick={() => setEditing(true)}>Edit</button>
             <button onClick={() => deleteTodo(id)}>Delete</button>
+            <Progress
+                todo={task}
+                progress={progress}
+                completed={completed}
+                toggle={handleToggle}
+            />
         </div>
     );
 

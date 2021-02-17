@@ -3,6 +3,7 @@ import React from "react";
 export default function ThemeToggle({ toggleTheme }) {
     return (
         <div className="toggleContainer">
+            Light{" "}
             <label className="switch">
                 <input
                     type="checkbox"
@@ -11,7 +12,8 @@ export default function ThemeToggle({ toggleTheme }) {
                     onClick={() => toggleTheme()}
                 />
                 <span className="slider round" />
-            </label>
+            </label>{" "}
+            Dark
         </div>
     );
 }
