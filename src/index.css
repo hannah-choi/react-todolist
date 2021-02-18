@@ -28,6 +28,11 @@ input:not([type="text"], [type="checkbox"]) {
     transition: 0.4s;
 }
 
+button:disabled {
+    border: gray;
+    color: gray;
+}
+
 input[type="text"] {
     width: 200px;
     padding: 2px;

@@ -21,7 +21,7 @@ export const GlobalStyles = createGlobalStyle`
         color: ${({ theme }) => theme.text};
 }
 
-    button:hover,
+    button:not(:disabled):hover,
     input:not([type="text"], [type="checkbox"]):hover {
         color: ${({ theme }) => theme.body};
         background-color: ${({ theme }) => theme.text};
@@ -29,6 +29,11 @@ export const GlobalStyles = createGlobalStyle`
 
     .slider {
         background-color: ${({ theme }) => theme.text};
+    }
+
+
+    .progress {
+        display:inline-block;
     }
   
   `;

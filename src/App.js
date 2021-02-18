@@ -4,13 +4,11 @@ import { lightTheme, darkTheme } from "./theme";
 import { GlobalStyles } from "./Global";
 import List from "./components/List";
 import Input from "./components/Input";
+import ProgressManager from "./components/ProgressManager";
 import ThemeToggle from "./components/ThemeToggle";
-import TodoProvider from "./TodoProvider";
-//import { useTodo } from "./TodoProvider";
 
 function App() {
     const [theme, setTheme] = useState("light");
-    // const { countCompletedTodos } = useTodo();
 
     const toggleTheme = () => {
         if (theme === "light") {
@@ -27,6 +25,7 @@ function App() {
                 <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
                 <Input />
                 <List />
+                <ProgressManager />
             </>
         </ThemeProvider>
     );

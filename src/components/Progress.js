@@ -1,11 +1,20 @@
 import React from "react";
 
 function Progress({ todo, progress, toggle, completed }) {
-    const complete = <button disabled>{"Completed 🟢"}</button>;
+    const complete = (
+        <>
+            {todo}: <div className="progress">{"Completed 🟢"}</div>
+            <br />
+        </>
+    );
     const progressButton = (
-        <button onClick={toggle}>
-            {progress ? "Almost done 🟡" : "In progress 🔴"}
-        </button>
+        <>
+            {todo}:{" "}
+            <div className="progress" onClick={toggle}>
+                {progress ? "Almost done 🟡" : "In progress 🔴"}
+            </div>
+            <br />
+        </>
     );
 
     console.log({ todo, progress });
