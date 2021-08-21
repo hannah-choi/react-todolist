@@ -9,7 +9,7 @@ interface Props {
 export const List: React.FC<Props> = ({ todos, toggleTodo }) => {
     return (
         <ul>
-            {todos.map(todo => <ListItem todo={todo} toggleTodo={toggleTodo} />)}
+            {todos.map(todo => <ListItem key={todo.id} todo={todo} toggleTodo={toggleTodo} />)}
         </ul>
     )
 }
