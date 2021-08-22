@@ -1,17 +1,18 @@
-import React from "react";
-import ListItem from "./ListItem";
+import React, { ReactElement } from 'react'
+import ListItem from './ListItem'
 
 interface Props {
     todos: Todo[];
     toggleTodo: ToggleTodo;
+    deleteTodo: DeleteTodo;
 }
 
-export const List: React.FC<Props> = ({ todos, toggleTodo }) => {
+function List({ todos, toggleTodo, deleteTodo }: Props): ReactElement {
     return (
         <ul>
-            {todos.map(todo => <ListItem key={todo.id} todo={todo} toggleTodo={toggleTodo} />)}
+            {todos.map(todo => <ListItem todo={todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />)}
         </ul>
     )
 }
 
-export default List;
+export default List

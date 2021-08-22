@@ -1,20 +1,18 @@
-import React, { useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 
 interface Props {
-    addTodo: AddTodo;
+    addTodo: AddTodo
 }
 
-export const Input: React.FC<Props> = ({ addTodo }) => {
+function Input({ addTodo }: Props): ReactElement {
 
-    const [input, setInput] = useState('')
+    const [text, setText] = useState('')
 
     return (
-        <form onSubmit={(e) => {
-            e.preventDefault(); addTodo(input); setInput('')
-        }}>
-            <input type='text' name='newTodo' value={input} onChange={(e) => setInput(e.target.value)} />
-            <input type='submit' value='Add todo' />
-        </form>
+        <form onSubmit={e => { e.preventDefault(); addTodo(text); setText('') }}>
+            <input type='text' value={text} onChange={(e) => setText(e.target.value)} />
+            <input type='submit' value='add todo' />
+        </form >
     )
 }
 

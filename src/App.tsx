@@ -1,31 +1,33 @@
 import { useState } from 'react';
-import Input from "./components/Input";
-import List from "./components/List";
 import { v4 } from 'uuid'
+import Input from './components/Input';
+import List from './components/List';
 
-const initialTodos: Todo[] = [
-    { text: 'Reading books', complete: false, id: v4() },
-    { text: 'Cooking dinner', complete: false, id: v4() },
-]
 
 function App() {
 
-    const [todos, setTodos] = useState(initialTodos)
+    const initialTodos: Todo[] = [
+        { text: 'Hacer la colada', id: v4(), complete: true },
+        { text: 'Leer el libro', id: v4(), complete: false }];
+
+    const [todos, setTodos] = useState(initialTodos);
+
+    const toggleTodo: ToggleTodo = (id) => {
+        setTodos(todos.map(todo => todo.id === id ? { ...todo, complete: !todo.complete } : todo))
+    }
+
+    const deleteTodo: DeleteTodo = (id) => {
+        setTodos(todos.filter(todo => todo.id !== id))
+    }
 
     const addTodo: AddTodo = (text) => {
         setTodos([...todos, { text, complete: false, id: v4() }])
     }
 
-    const toggleTodo: ToggleTodo = (selected: Todo) => {
-        setTodos(todos.map(todo =>
-            todo === selected ? { ...todo, complete: !todo.complete } : todo
-        ))
-    }
-
     return (
         <div className="App">
             <Input addTodo={addTodo} />
-            <List todos={todos} toggleTodo={toggleTodo} />
+            <List todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
         </div>
     );
 }
