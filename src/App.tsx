@@ -20,6 +20,10 @@ function App() {
         setTodos(todos.filter(todo => todo.id !== id))
     }
 
+    const editTodo: EditTodo = (id, text) => {
+        setTodos(todos.map(todo => todo.id === id ? { ...todo, text: text } : todo))
+    }
+
     const addTodo: AddTodo = (text) => {
         setTodos([...todos, { text, complete: false, id: v4() }])
     }
@@ -27,7 +31,7 @@ function App() {
     return (
         <div className="App">
             <Input addTodo={addTodo} />
-            <List todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
+            <List todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />
         </div>
     );
 }

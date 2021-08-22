@@ -5,12 +5,13 @@ interface Props {
     todos: Todo[];
     toggleTodo: ToggleTodo;
     deleteTodo: DeleteTodo;
+    editTodo: EditTodo;
 }
 
-function List({ todos, toggleTodo, deleteTodo }: Props): ReactElement {
+function List({ todos, toggleTodo, deleteTodo, editTodo }: Props): ReactElement {
     return (
         <ul>
-            {todos.map(todo => <ListItem todo={todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />)}
+            {todos.map(todo => <ListItem todo={todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo} editTodo={editTodo} />)}
         </ul>
     )
 }
